@@ -1,3 +1,4 @@
+use std::time::Duration;
 use async_std::channel;
 use async_std::task;
 
@@ -10,6 +11,8 @@ async fn main() {
     let tx2 = tx.clone();
 
     task::spawn(async move {
+        // počakamo eno sekundo
+        task::sleep(Duration::from_secs(1)).await;
         // pošljemo vrednost
         tx.send("sending from first handle").await.unwrap();
     });
